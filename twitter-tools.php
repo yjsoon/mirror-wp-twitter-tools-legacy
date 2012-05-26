@@ -442,11 +442,11 @@ class twitter_tools {
 		return 600;
 	}
 	
-	function do_tweet($tweet = '') {		
+	function do_tweet($tweet = '', $post_id = 0) {		
 		if (empty($tweet) || empty($tweet->tw_text)) {
 			return;
 		}
-		$tweet = apply_filters('aktt_do_tweet', $tweet); // return false here to not tweet
+		$tweet = apply_filters('aktt_do_tweet', $tweet, $post_id); // return false here to not tweet
 		if (!$tweet) {
 			return;
 		}
@@ -492,7 +492,7 @@ class twitter_tools {
 		if (!$tweet) {
 			return;
 		}
-		$this->do_tweet($tweet);
+        $this->do_tweet($tweet, $post_id);
 		add_post_meta($post_id, 'aktt_tweeted', '1', true);
 	}
 	
